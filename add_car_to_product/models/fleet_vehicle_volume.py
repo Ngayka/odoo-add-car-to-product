@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class FleetVehicleVolume(models.model):
+class FleetVehicleVolume(models.Model):
     _name = "fleet.vehicle.volume"
     _description = "Vehicle Volume"
 

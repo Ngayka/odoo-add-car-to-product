@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class FleetVehicleModel(models.model):
+class FleetVehicleModel(models.Model):
     _inherit = "fleet.vehicle.model"
 
     model_year_from = fields.Integer(string="Year from")

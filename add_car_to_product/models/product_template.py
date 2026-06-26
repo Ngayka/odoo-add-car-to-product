@@ -11,7 +11,7 @@ class ProductProduct(models.Model):
     _inherit = "product.product"
 
     is_autoparts = fields.Boolean(
-        related="product.template.is_autopatrs",
+        related="product_tmpl_id.is_autoparts",
         store=True,
         readonly=False
     )
