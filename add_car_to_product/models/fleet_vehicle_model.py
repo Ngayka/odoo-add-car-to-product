@@ -8,4 +8,4 @@ class FleetVehicleModel(models.model):
     model_year_to = fields.Integer(string="Year to")
     model_type = fields.Char(string="Model type")
     ovoko_car_id = fields.Char(string="Ovoko car ID")
-    volume = (...)
+    volume = fields.Many2one("fleet.vehicle.volume", string="Volume")
