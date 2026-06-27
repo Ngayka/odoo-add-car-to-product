@@ -23,9 +23,9 @@
                 <field name="model_type"/>
                 <label for="model_year_from" string="Years"/>
                 <div class="o_row">
-                    <field name="model_year_from" placeholder="From"/>
+                    <field name="model_year_from" widget="integer" placeholder="From"/>
                     <span>-</span>
-                    <field name="model_year_to" placeholder="To"/>
+                    <field name="model_year_to" widget="integer" placeholder="To"/>
                 </div>
             </xpath>
             <xpath expr="//page[@name='information']" position="replace">
