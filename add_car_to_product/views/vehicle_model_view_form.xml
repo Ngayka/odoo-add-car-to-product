@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="fleet_vehicle_model_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.model.form.inherit.add.car.fields</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="replace">
+                <div class="oe_title">
+                    <label for="brand_id"/>
+                    <h1>
+                        <field name="brand_id" placeholder="e.g. Tesla"/>
+                    </h1>
+
+                    <label for="name"/>
+                    <h2>
+                        <field name="name" placeholder="e.g. Model S"/>
+                    </h2>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='vehicle_type']" position="before">
+                <field name="model_type"/>
+                <label for="model_year_from" string="Years"/>
+                <div class="o_row">
+                    <field name="model_year_from" placeholder="From"/>
+                    <span>-</span>
+                    <field name="model_year_to" placeholder="To"/>
+                </div>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="replace">
+                <page string="Information" name="information">
+                    <group>
+                        <group string="Model" invisible="vehicle_type != 'car'">
+                            <field name="seats"/>
+                            <field name="doors"/>
+                            <field name="model_year"/>
+                            <field name="trailer_hook"/>
+                            <field name="ovoko_car_id"/>
+                        </group>
+
+                        <group string="Engine" invisible="vehicle_type != 'car'">
+                            <field name="volume"/>
+                            <field name="default_fuel_type" required="1"/>
+                            <field name="transmission"/>
+                            <label for="power"/>
+                            <div class="o_row">
+                                <field name="power"/>
+                                <span>kW</span>
+                            </div>
+                            <label for="default_co2"/>
+                            <div class="o_row" name="default_co2">
+                                <field name="default_co2"/>
+                                <span>g/km</span>
+                            </div>
+                            <field name="co2_standard"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

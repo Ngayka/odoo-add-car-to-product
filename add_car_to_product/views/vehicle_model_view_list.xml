@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="fleet_vehicle_model_tree_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.model.tree.inherit.add.car.fields</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="model_type"/>
+                <field name="model_year_from"/>
+                <field name="model_year_to"/>
+                <field name="volume"/>
+                <field name="default_fuel_type"/>
+                <field name="transmission"/>
+            </xpath>
+            <xpath expr="//field[@name='vehicle_count']" position="replace"/>
+            <xpath expr="//field[@name='vehicle_type']" position="replace"/>
+            <xpath expr="//field[@name='category_id']" position="replace"/>
+        </field>
+    </record>
+</odoo>

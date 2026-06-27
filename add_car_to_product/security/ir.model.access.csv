@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_vehicle_volume,fleet.vehicle.volume,model_fleet_vehicle_volume,,1,1,1,1
