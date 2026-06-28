@@ -19,7 +19,16 @@
                         <field name="for_all_models"/>
                         <field name="oem"/>
                     </group>
-                    <field name="compatible_vehicle_ids">Compatible vehicles</field>
+                    <field name="compatible_vehicle_ids">
+                        <tree editable="bottom">
+                            <field name="brand_id"/>
+                            <field name="name"/>
+                            <field name="model_type"/>
+                            <field name="years"/>
+                            <field name="volume"/>
+                            <field name="default_fuel_type"/>
+                            <field name="transmission"/>
+                        </tree>Compatible vehicles</field>
                 </page>
              </xpath>
             <xpath expr="//field[@name='detailed_type']" position="after">
