@@ -1,7 +1,7 @@
 {
     'name': 'Add Car To Product',
     'version': '17.0.1.0.0',
-    'depends': ['product', 'fleet'],
+    'depends': ['product', 'fleet', 'website_sale'],
     'author': 'Semde',
     'category': 'Sales',
     'description': 'Add car information to products',
@@ -14,6 +14,7 @@
          "views/vehicle_model_view_list.xml",
          "views/product_template_product_form_view.xml",
          "views/product_product_form_view.xml",
+         "views/website_sale_autoparts_template.xml",
          ],
     'installable': True,
     'application': False,
