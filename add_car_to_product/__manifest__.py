@@ -5,11 +5,16 @@
     'author': 'Semde',
     'category': 'Sales',
     'description': 'Add car information to products',
-    'data': ["security/ir.model.access.csv",
-             "views/vehicle_model_view_form.xml",
-             "views/vehicle_model_view_list.xml",
-             "views/product_template_product_form_view.xml",
-             ],
+    'data': [
+        #security
+         "security/security.xml",
+         "security/ir.model.access.csv",
+        #views
+         "views/vehicle_model_view_form.xml",
+         "views/vehicle_model_view_list.xml",
+         "views/product_template_product_form_view.xml",
+         "views/product_product_form_view.xml",
+         ],
     'installable': True,
     'application': False,
     'license': 'LGPL-3',

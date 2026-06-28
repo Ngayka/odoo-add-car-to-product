@@ -1,0 +1,24 @@
+<odoo>
+    <record id="product_product_form_inherit_autoparts" model="ir.ui.view">
+        <field name="name">product.product.form.inherit.autoparts</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//notebook" position="inside">
+                <page string="Autoparts" name="autoparts"
+                    invisible="not is_autoparts"
+                    groups="add_car_to_product.group_car">
+                    <group>
+                        <field name="for_all_models"/>
+                        <field name="oem"/>
+                    </group>
+                    <field name="compatible_vehicle_ids"/>
+                </page>
+             </xpath>
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <field name="is_autoparts"/>
+                <field name="ovoko_part_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
