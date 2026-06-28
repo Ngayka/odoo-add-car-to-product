@@ -10,6 +10,11 @@ class FleetVehicleModel(models.Model):
     model_type = fields.Char(string="Model type")
     ovoko_car_id = fields.Char(string="Ovoko car ID")
     volume = fields.Many2one("fleet.vehicle.volume", string="Volume")
+    years = fields.Char(
+        string="Years",
+        compute="_compute_years",
+        store=True,
+    )
 
     @api.constrains("model_year_from", "model_year_to")
     def _check_model_years(self):
@@ -22,3 +27,13 @@ class FleetVehicleModel(models.Model):
                 raise ValidationError(
                     "Year to must be greater than or equal to Year from."
                 )
+
+    @api.depends("model_year_from", "model_year_to")
+    def _compute_years(self):
+        for record in self:
+            if record.model_year_from and record.model_year_to:
+                record.years = f"{record.model_year_from}-{record.model_year_to}"
+            elif record.model_year_from:
+                record.years = str(record.model_year_from)
+            else:
+                record.years = ""
