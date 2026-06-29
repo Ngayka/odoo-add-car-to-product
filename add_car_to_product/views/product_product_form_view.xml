@@ -19,6 +19,7 @@
                         <field name="for_all_models"/>
                         <field name="oem"/>
                     </group>
+                    <div class="o_form_label">Compatible vehicles</div>
                     <field name="compatible_vehicle_ids">
                         <tree editable="bottom">
                             <field name="brand_id"/>
@@ -28,7 +29,8 @@
                             <field name="volume"/>
                             <field name="default_fuel_type"/>
                             <field name="transmission"/>
-                        </tree>Compatible vehicles</field>
+                        </tree>
+                    </field>
                 </page>
              </xpath>
             <xpath expr="//field[@name='detailed_type']" position="after">

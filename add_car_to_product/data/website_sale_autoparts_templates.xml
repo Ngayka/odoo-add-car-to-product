@@ -2,6 +2,11 @@
 <odoo>
     <template id="autoparts_filter_shop" inherit_id="website_sale.products">
         <xpath expr="//div[@id='products_grid']" position="before">
+            <t t-set="selected_brand" t-value="request.params.get('brand_id')"/>
+            <t t-set="selected_model" t-value="request.params.get('model_id')"/>
+            <t t-set="selected_year" t-value="request.params.get('year')"/>
+            <t t-set="selected_volume" t-value="request.params.get('volume_id')"/>
+            <t t-set="model_domain" t-value="selected_brand and [('brand_id', '=', int(selected_brand))] or []"/>
 
             <form action="/shop" method="get" class="mb-3">
                 <div class="row g-2">
@@ -9,7 +14,9 @@
                         <select name="brand_id" class="form-select" onchange="this.form.submit()">
                             <option value="">Manufacturer</option>
                             <t t-foreach="request.env['fleet.vehicle.model.brand'].sudo().search([])" t-as="brand">
-                                <option t-att-value="brand.id">
+                                <option
+                                    t-att-value="brand.id"
+                                    t-att-selected="str(brand.id) == selected_brand and 'selected' or None">>
                                     <t t-esc="brand.name"/>
                                 </option>
                             </t>
@@ -25,7 +32,9 @@
                             <option value="">Model name</option>
                             <t t-foreach="request.env['fleet.vehicle.model'].sudo().search(model_domain)"
                                t-as="vehicle_model">
-                                <option t-att-value="vehicle_model.id">
+                                <option
+                                    t-att-value="vehicle_model.id"
+                                    t-att-selected="str(vehicle_model.id) == selected_model and 'selected' or None">
                                     <t t-esc="vehicle_model.name"/>
                                 </option>
                             </t>
@@ -40,7 +49,9 @@
                         <select name="volume_id" class="form-select">
                             <option value="">Volume</option>
                             <t t-foreach="request.env['fleet.vehicle.volume'].sudo().search([])" t-as="volume">
-                                <option t-att-value="volume.id">
+                                <option
+                                    t-att-value="volume.id"
+                                    t-att-selected="str(volume.id) == selected_volume and 'selected' or None">
                                     <t t-esc="volume.name"/>
                                 </option>
                             </t>
@@ -54,7 +65,6 @@
                     </div>
                 </div>
             </form>
-
         </xpath>
     </template>
 </odoo>
