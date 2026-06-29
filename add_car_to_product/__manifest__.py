@@ -14,7 +14,8 @@
          "views/vehicle_model_view_list.xml",
          "views/product_template_product_form_view.xml",
          "views/product_product_form_view.xml",
-         "views/website_sale_autoparts_template.xml",
+        #data
+         "data/website_sale_autoparts_templates.xml",
          ],
     'installable': True,
     'application': False,

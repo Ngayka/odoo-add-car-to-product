@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="autoparts_filter_shop" inherit_id="website_sale.products">
+        <xpath expr="//div[@id='products_grid']" position="before">
+
+            <form action="/shop/autoparts/search" method="get" class="mb-3">
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        <select name="brand_id" class="form-select">
+                            <option value="">Manufacturer</option>
+                            <t t-foreach="request.env['fleet.vehicle.model.brand'].sudo().search([])" t-as="brand">
+                                <option t-att-value="brand.id">
+                                    <t t-esc="brand.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select name="model_id" class="form-select">
+                            <option value="">Model name</option>
+                            <t t-foreach="request.env['fleet.vehicle.model'].sudo().search([])" t-as="vehicle_model">
+                                <option t-att-value="vehicle_model.id">
+                                    <t t-esc="vehicle_model.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="number" name="year" class="form-control" placeholder="Year"/>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select name="volume_id" class="form-select">
+                            <option value="">Volume</option>
+                            <t t-foreach="request.env['fleet.vehicle.volume'].sudo().search([])" t-as="volume">
+                                <option t-att-value="volume.id">
+                                    <t t-esc="volume.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </xpath>
+    </template>
+</odoo>
