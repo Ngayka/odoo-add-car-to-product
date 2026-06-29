@@ -5,6 +5,4 @@ class FleetVehicleVolume(models.Model):
     _name = "fleet.vehicle.volume"
     _description = "Vehicle Volume"
 
-    name = fields.Char(
-        string="Volume",
-        required=True)
+    name = fields.Char(string="Volume", required=True)

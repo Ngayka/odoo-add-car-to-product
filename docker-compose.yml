@@ -21,7 +21,7 @@ services:
       USER: odoo
       PASSWORD: odoo
     volumes:
-      - /mnt/c/Users/semde/projects/odoo_task_car_to_product:/mnt/extra-addons
+      - ./add_car_to_product:/mnt/extra-addons/add_car_to_product
 
 volumes:
   postgres_data:

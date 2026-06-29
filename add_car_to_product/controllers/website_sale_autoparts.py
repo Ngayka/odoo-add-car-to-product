@@ -6,11 +6,7 @@ from odoo.addons.website_sale.controllers.main import WebsiteSale
 class WebsiteSaleAutoparts(WebsiteSale):
 
     def _get_search_domain(
-            self,
-            search,
-            category,
-            attrib_values,
-            search_in_description=True
+        self, search, category, attrib_values, search_in_description=True
     ):
         domain = super()._get_search_domain(
             search,
@@ -49,11 +45,16 @@ class WebsiteSaleAutoparts(WebsiteSale):
         if not vehicles:
             return domain + [("id", "=", 0)]
 
-        products = request.env["product.product"].sudo().search([
-            ("is_autoparts", "=", True),
-            ("compatible_vehicle_ids", "in", vehicles.ids),
-        ])
+        products = (
+            request.env["product.product"]
+            .sudo()
+            .search(
+                [
+                    ("is_autoparts", "=", True),
+                    ("compatible_vehicle_ids", "in", vehicles.ids),
+                ]
+            )
+        )
 
         templates = products.mapped("product_tmpl_id")
         return domain + [("id", "in", templates.ids)]
-
