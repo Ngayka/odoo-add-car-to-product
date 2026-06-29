@@ -1,20 +1,34 @@
 from odoo import http
 from odoo.http import request
+from odoo.addons.website_sale.controllers.main import WebsiteSale
 
 
-class WebsiteSaleAutoparts(http.Controller):
+class WebsiteSaleAutoparts(WebsiteSale):
 
-    @http.route("/shop/autoparts/models", type="json", auth="public", website=True)
-    def get_models(self, brand_id):
-        models = request.env["fleet.vehicle.model"].sudo().search([
-            ("brand_id", "=", int(brand_id))
-        ])
-        return [{"id": model.id, "name": model.name} for model in models]
+    def _get_search_domain(
+            self,
+            search,
+            category,
+            attrib_values,
+            search_in_description=True
+    ):
+        domain = super()._get_search_domain(
+            search,
+            category,
+            attrib_values,
+            search_in_description=search_in_description,
+        )
+        params = request.httprequest.args
 
-    @http.route("/shop/autoparts/search", type="http", auth="public", website=True)
-    def autoparts_search(self, brand_id=None, model_id=None, year=None, volume_id=None, **kwargs):
+        brand_id = params.get("brand_id")
+        model_id = params.get("model_id")
+        year = params.get("year")
+        volume_id = params.get("volume_id")
+
+        if not any([brand_id, model_id, year, volume_id]):
+            return domain
+
         vehicle_domain = []
-
         if brand_id:
             vehicle_domain.append(("brand_id", "=", int(brand_id)))
 
@@ -32,14 +46,14 @@ class WebsiteSaleAutoparts(http.Controller):
             vehicle_domain.append(("volume", "=", int(volume_id)))
 
         vehicles = request.env["fleet.vehicle.model"].sudo().search(vehicle_domain)
+        if not vehicles:
+            return domain + [("id", "=", 0)]
 
         products = request.env["product.product"].sudo().search([
             ("is_autoparts", "=", True),
             ("compatible_vehicle_ids", "in", vehicles.ids),
         ])
 
-        return request.render("website_sale.products", {
-            "products": products,
-            "search": "",
-        })
+        templates = products.mapped("product_tmpl_id")
+        return domain + [("id", "in", templates.ids)]
 
